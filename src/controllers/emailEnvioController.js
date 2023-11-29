@@ -12,7 +12,6 @@ const URL = 'http://localhost:3000/enter/'
 const sendMagicLink = async(email, link, method) => {
     var asunto;
     var body;
-    console.log("email: " + email + " link: " + link + " method: " + method);
 
     if(method == 'signup'){
         asunto = "Tu link de registro";

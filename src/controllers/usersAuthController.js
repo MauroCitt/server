@@ -8,28 +8,28 @@ const { sendMagicLink } = require('./emailEnvioController.js');
 const register = async (email) => {
   try {
     const newUser = {
-      Email: email,
-      MagicLink: uuidv4()
+    	Email: email,
+    	MagicLink: uuidv4()
     };
-    let user = await User.create(newUser);
-    // Use await to wait for send_magic_link to complete before continuing
-    let sendEmail = await sendMagicLink(email, user.MagicLink, 'signup');
-    return { ok: true, message: "Usuario creado" };
-  } catch (error) {
-	console.error(error);
-    return { ok: false, error };
-  }
+		let user = await User.create(newUser);
+		// Use await to wait for send_magic_link to complete before continuing
+		let sendEmail = await sendMagicLink(email, user.MagicLink, 'signup');
+		return { ok: true, message: "Usuario creado" };
+	} catch (error) {
+		console.error(error);
+		return { ok: false, error };
+	}
 };
 
 const login = async (req, res) => {
-  const { email, magicLink } = req.body;
-  if (!email)
-    return res.json({ ok: false, message: "Debe llenar todos los campos" });
-  if (!validator.isEmail(email))
-    return res.json({ ok: false, message: "El link no es válido" });
+	const { email, magicLink } = req.body;
+  	if (!email)
+    	return res.json({ ok: false, message: "Debe llenar todos los campos" });
+  	if (!validator.isEmail(email))
+    	return res.json({ ok: false, message: "El link no es válido" });
 
-  try {
-    const user = await User.findOne({ Email: email });
+  	try {
+   		const user = await User.findOne({ Email: email });
     if (!user) {
       let reg = await register(email);
       res.send({ ok: true, message: 'Tu cuenta ha sido creada, presiona el enlace en el email para ingresar' });
