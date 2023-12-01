@@ -7,7 +7,7 @@ const transport = nodemailer.createTransport({
         pass: process.env.NODEMAILER_PASS
     }
 });
-const URL = 'http://localhost:3000/enter/'
+const URL = 'http://localhost:3000/home/'
 
 const sendMagicLink = async(email, link, method) => {
     var asunto;
