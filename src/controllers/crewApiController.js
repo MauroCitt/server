@@ -43,8 +43,6 @@ crewApiController.getJsonFile = async (req, res, next) => {
                     break;
                 }
             }
-
-            // Use findOneAndUpdate to update the director field
             await Movie.findOneAndUpdate({ id: idMovie }, { $set: { director: director } }, { new: true });
             allData.push(data);
         }
